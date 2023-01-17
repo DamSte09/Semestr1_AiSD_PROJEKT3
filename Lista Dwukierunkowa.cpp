@@ -5,21 +5,21 @@
  
  // Zdefiniowanie struktury
 typedef struct ListElement {
-    int data;   //pole przechowujaca dana
-    struct ListElement * previous;  //pole wskazyjace na poprzedni element listy 
-    struct ListElement * next;  //pole wskazujace na nastepny element listy
+    int data;   //pole przechowujące daną
+    struct ListElement * previous;  //pole wskazujące na poprzedni element listy 
+    struct ListElement * next;  //pole wskazujące na następny element listy
 } ListElement_type;
  
  
 void show(ListElement_type *head);
 void show_reverse(ListElement_type *head);
 int list_size(ListElement_type *head);
-void push_front(ListElement_type **head, int number);
-void push_back(ListElement_type **head, int number);
-void push_by_index(ListElement_type **head, int number, int position);
-void pop_front(ListElement_type **head);
-void pop_back(ListElement_type **head);
-void pop_by_index(ListElement_type **head, int position);
+void add_front(ListElement_type **head, int number);
+void add_back(ListElement_type **head, int number);
+void add_by_index(ListElement_type **head, int number, int position);
+void delete_front(ListElement_type **head);
+void delete_back(ListElement_type **head);
+void delete_by_index(ListElement_type **head, int position);
  
 int main()
 {
@@ -66,13 +66,13 @@ int main()
     case 1:
         printf("Wpisz liczbe jaka chcesz dodac: ");
         scanf("%i", &number);
-        push_front(&head, number);
+        add_front(&head, number);
         break;
 
      case 2:
         printf("Wpisz liczbe jaka chcesz dodac: ");
         scanf("%i", &number);
-        push_back(&head, number);
+        add_back(&head, number);
         break;
 
     case 3:
@@ -80,21 +80,21 @@ int main()
         scanf("%i", &number);
         printf("Wpisz indeks: ");
         scanf("%i", &index);
-        push_by_index(&head, number, index);
+        add_by_index(&head, number, index);
         break;
 
     case 4:
-        pop_front(&head);
+        delete_front(&head);
         break;
 
     case 5:
-        pop_back(&head);
+        delete_back(&head);
         break;
  
     case 6:
         printf("Wpisz indeks(0 to poczatek) elementu, ktorego chcesz usunac z listy: ");
         scanf("%i", &index);
-        pop_by_index(&head, index);
+        delete_by_index(&head, index);
         break;
     
     case 7:
@@ -113,16 +113,16 @@ int main()
 
 
 // Dodawanie elementu na początek listy
-void push_front(ListElement_type **head, int number) {
+void add_front(ListElement_type **head, int number) {
     if(*head==NULL) {   // jesli lista jest pusta
-        // lokujemy pamiec dla nowego elementu
+        // alokujemy pamiec dla nowego elementu
         *head = (ListElement_type *)malloc(sizeof(ListElement_type));   
         (*head)->data = number; // przypisanie wartosci
         (*head)->previous=NULL; // poprzedni element ustawiamy na NULL
         (*head)->next = NULL;   // nastepny element ustawiamy na NULL
     } else {    // jesli cos jest na liscie
         ListElement_type *current;  // tworzymy wskaznik dla nowego elementu
-        // lokujemy pamiec dla nowego elementu
+        // alokujemy pamiec dla nowego elementu
         current=(ListElement_type *)malloc(sizeof(ListElement_type));
         current->data=number;   // przypisanie wartosci
         current->previous=NULL; // poprzedni element ustawiamy na NULL
@@ -134,10 +134,10 @@ void push_front(ListElement_type **head, int number) {
 }
 
 // Dodawanie elementy na końcu listy
-void push_back(ListElement_type **head, int number) { 
+void add_back(ListElement_type **head, int number) { 
     if(*head==NULL) // gdy lista jest pusta
     {
-        // lokujemy pamiec dla nowego elementu
+        // alokujemy pamiec dla nowego elementu
         *head = (ListElement_type *)malloc(sizeof(ListElement_type));
         (*head)->data = number; // przypisanie wartosci
         (*head)->previous = NULL;   // poprzedni element ustawiamy na NULL
@@ -157,11 +157,11 @@ void push_back(ListElement_type **head, int number) {
 }
 
 // Dodawanie elementu o wybranym indeksie
-void push_by_index(ListElement_type **head, int number, int position) {
+void add_by_index(ListElement_type **head, int number, int position) {
     // jesli indeks to 0, wykorzystujemy funkcje dodajaca elementu na poczatek listy
-    if(position==0) push_front(head, number);
+    if(position==0) add_front(head, number);
     else {
-        if(position==list_size(*head)) push_back(head, number);
+        if(position==list_size(*head)) add_back(head, number);
         else {
         ListElement_type *current=*head;
             ListElement_type *tmp;
@@ -172,7 +172,7 @@ void push_by_index(ListElement_type **head, int number, int position) {
                 i++;
             }   // przechodzimy przez liste do elementu poprzedniego od indeksu
             tmp=current->next;  // tmp jako nastepny
-            // lokujemy pamiec
+            // alokujemy pamiec
             current->next=(ListElement_type *)malloc(sizeof(ListElement_type));
             current->next->data=number; // przypisujemy wartosc
             current->next->previous=current;    // 
@@ -182,8 +182,8 @@ void push_by_index(ListElement_type **head, int number, int position) {
     }
 }
 
-// Usuwanie pierwszego elementu
-void pop_front(ListElement_type **head) {
+// Usuwanie pierwszego elementu listy
+void delete_front(ListElement_type **head) {
     if (*head!=NULL) {  // jesli lista nie jest pusta
         if((*head)->next==NULL) {   //jesli na liscie znajduje sie tylko jeden element
         *head=NULL; // usuwamy element
@@ -198,7 +198,7 @@ void pop_front(ListElement_type **head) {
 }
 
 // Usuwanie elementu z konca listy
-void pop_back(ListElement_type **head) {
+void delete_back(ListElement_type **head) {
     if((*head)->next==NULL) { //jezeli na liscie jest tylko jeden element
     *head=NULL; // lista staje sie pusta 
     } else {    //jezeli jest wiecej elementow na liscie
@@ -212,7 +212,7 @@ void pop_back(ListElement_type **head) {
 }
 
 // Usuwanie elementu o wybranym indeksie
-void pop_by_index(ListElement_type **head, int position) {
+void delete_by_index(ListElement_type **head, int position) {
     // jesli indeks=0, wykonaj funkcję usuwajacą element z początku listy
     if(position==0) pop_front(head);
     else {  // jesli indeks jest inny niż 0
@@ -263,10 +263,10 @@ void show_reverse(ListElement_type *head) {
     }
 }
 
-// Spradza ile elementów jest na liście
+// Sprawdzanie ile elementów jest na liście
 int list_size(ListElement_type *head) {
     int counter=0;
-    if(head==NULL) return counter;  // jeśli lista pusta zwraca 0
+    if(head==NULL) return counter;  // jeśli lista jest pusta zwraca 0
     else {  // w przeciwnym razie
         ListElement_type *current=head;
         do {// przechodząc przez listę liczy elementy
