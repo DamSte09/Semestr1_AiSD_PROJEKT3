@@ -45,7 +45,8 @@ int main()
     printf("\nPoglad listy: ");
     show(head);
     printf("\n\n");
-
+	
+	
     printf("1. Dodaj element na poczatek listy.\n");
     printf("2. Dodaj element na koniec listy.\n");
     printf("3. Dodaj element zgodnie z wybranym indeksem.\n");
@@ -55,6 +56,7 @@ int main()
     printf("7. Wyswietl liste w odwrotnej kolejnosci.\n");
     printf("0. Zakoncz program.\n");
     
+    printf("\nWybierz operacje jaka chcesz wykonac: ");
     scanf("%i", &option);
  
     switch (option) //mozliwosc wyboru
@@ -64,19 +66,19 @@ int main()
         break;
     
     case 1:
-        printf("Wpisz liczbe jaka chcesz dodac: ");
+        printf("\nWpisz liczbe jaka chcesz dodac: ");
         scanf("%i", &number);
         add_front(&head, number);
         break;
 
      case 2:
-        printf("Wpisz liczbe jaka chcesz dodac: ");
+        printf("\nWpisz liczbe jaka chcesz dodac: ");
         scanf("%i", &number);
         add_back(&head, number);
         break;
 
     case 3:
-        printf("Wpisz liczbe jaka chcesz dodac: ");
+        printf("\nWpisz liczbe jaka chcesz dodac: ");
         scanf("%i", &number);
         printf("Wpisz indeks: ");
         scanf("%i", &index);
@@ -92,7 +94,7 @@ int main()
         break;
  
     case 6:
-        printf("Wpisz indeks(0 to poczatek) elementu, ktorego chcesz usunac z listy: ");
+        printf("\nWpisz indeks(0 to poczatek) elementu, ktorego chcesz usunac z listy: ");
         scanf("%i", &index);
         delete_by_index(&head, index);
         break;
@@ -103,7 +105,7 @@ int main()
         break;
 
     default:
-        printf("Podaj wlasciwa opcje.");
+        printf("\nPodaj wlasciwa opcje.");
         Sleep(2000);
         break;
     }
