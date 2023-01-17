@@ -112,11 +112,7 @@ int main()
 }
 
 
-<<<<<<< Updated upstream
-// Dodawanie elementu na początek listy
-=======
 // Dodawanie elementu na poczatek listy
->>>>>>> Stashed changes
 void add_front(ListElement_type **head, int number) {
     if(*head==NULL) {   // jesli lista jest pusta
         // alokujemy pamiec dla nowego elementu
@@ -137,11 +133,7 @@ void add_front(ListElement_type **head, int number) {
     }
 }
 
-<<<<<<< Updated upstream
-// Dodawanie elementy na końcu listy
-=======
 // Dodawanie elementy na koncu listy
->>>>>>> Stashed changes
 void add_back(ListElement_type **head, int number) { 
     if(*head==NULL) // gdy lista jest pusta
     {
@@ -183,11 +175,7 @@ void add_by_index(ListElement_type **head, int number, int position) {
             // alokujemy pamiec
             current->next=(ListElement_type *)malloc(sizeof(ListElement_type));
             current->next->data=number; // przypisujemy wartosc
-<<<<<<< Updated upstream
-            current->next->previous=current;    // 
-=======
             current->next->previous=current;   
->>>>>>> Stashed changes
             tmp->previous=current->next;
             current->next->next=tmp; 
         }
@@ -225,51 +213,30 @@ void delete_back(ListElement_type **head) {
 
 // Usuwanie elementu o wybranym indeksie
 void delete_by_index(ListElement_type **head, int position) {
-<<<<<<< Updated upstream
-    // jesli indeks=0, wykonaj funkcję usuwajacą element z początku listy
-    if(position==0) pop_front(head);
-    else {  // jesli indeks jest inny niż 0
-=======
     // jesli indeks=0, wykonaj funkcje usuwajaca element z poczatku listy
     if(position==0) delete_front(head);
     else {  // jesli indeks jest inny niz 0
->>>>>>> Stashed changes
         ListElement_type *current=*head;
         ListElement_type *tmp;
         int i=0;
         while (current->next != NULL && i<position-1) {
             current=current->next;
             i++;
-<<<<<<< Updated upstream
-        }   // przechodzimy po liście do elementu poprzedzającego węzeł
-        tmp = current->next;    // tymczasowy element przechowuje element ktory chcemy usunac
-        //Ustaw nastepnik elementu poprzedzającego węzeł, który chcesz usunąć, 
-        //następnikiem tego elementu (z wykorzystaniem tymczasowego elementu),
-=======
         }   // przechodzimy po liscie do elementu poprzedzajacego wezel
         tmp = current->next;    // tymczasowy element przechowuje element, ktory chcemy usunac
->>>>>>> Stashed changes
         current->next = tmp->next;  
         current->next->previous=current;
         free(tmp);  //zwolnij pamiec z tymczasowego elementu
     }
 }
 
-<<<<<<< Updated upstream
-// Pokazywanie listy od początku
-=======
 // Pokazywanie listy od poczatku
->>>>>>> Stashed changes
 void show(ListElement_type *head) {
     printf("\n");
     if(head==NULL) printf("Lista jest pusta");
     else {
         ListElement_type *current=head;
-<<<<<<< Updated upstream
-        do {    //wypisywanie elementów po kolei
-=======
         do {    //wypisywanie elementow po kolei
->>>>>>> Stashed changes
             printf("%i", current->data);
             printf("\n");
             current = current->next;
@@ -277,11 +244,7 @@ void show(ListElement_type *head) {
     }
 }
  
-<<<<<<< Updated upstream
-// Pokazanie listy od końca
-=======
 // Pokazanie listy od konca
->>>>>>> Stashed changes
 void show_reverse(ListElement_type *head) {
     printf("\n");
     if(head==NULL) printf("Lista jest pusta");
@@ -290,11 +253,7 @@ void show_reverse(ListElement_type *head) {
         while (current->next != NULL) {
             current = current->next; 
         }   // przechodzimy na koniec listy
-<<<<<<< Updated upstream
-        do {    // wypisujemy elementy od końca listy
-=======
         do {    // wypisujemy elementy od konca listy
->>>>>>> Stashed changes
             printf("%i", current->data);
             printf("\n");
             current = current->previous;
@@ -302,15 +261,6 @@ void show_reverse(ListElement_type *head) {
     }
 }
 
-<<<<<<< Updated upstream
-// Sprawdzanie ile elementów jest na liście
-int list_size(ListElement_type *head) {
-    int counter=0;
-    if(head==NULL) return counter;  // jeśli lista jest pusta zwraca 0
-    else {  // w przeciwnym razie
-        ListElement_type *current=head;
-        do {// przechodząc przez listę liczy elementy
-=======
 // Sprawdzanie ile elementow jest na liscie
 int list_size(ListElement_type *head) {
     int counter=0;
@@ -318,14 +268,9 @@ int list_size(ListElement_type *head) {
     else {  // w przeciwnym razie
         ListElement_type *current=head;
         do {// przechodzac przez liste liczy elementy
->>>>>>> Stashed changes
             counter++;
             current = current->next;
         } while (current != NULL);
     }
-<<<<<<< Updated upstream
-    return counter; // zwraca liczbe elementów
-=======
     return counter; // zwraca liczbe elementow
->>>>>>> Stashed changes
 }
