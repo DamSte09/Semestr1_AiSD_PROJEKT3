@@ -1,0 +1,226 @@
+Zdefiniowanie struktury
+
+Zdefiniuj typ danych "ListaElementow_typ" jako strukturę zawierającą trzy pola: 
+"data", "previous" i "next".
+Pole "data" przechowuje int.
+Pole "previous" jest wskaźnikiem na poprzedni element listy.
+Pole "next" jest wskaźnikiem na następny element listy.
+
+
+
+Dodanie elementu na początek listy
+
+Wejście (ListaElementow_typ **glowa, liczba)
+	jeżeli lista jest pusta wykonaj
+		alokuj pamięć dla nowego elementu
+		przypisz wartość "liczba" do pola "data" nowego elementu
+		ustaw pole "poprzedni" na NULL
+		ustaw pole "następny" na NULL
+		przypisz adres nowego elementu do wskaźnika "glowa"
+	w przeciwnym razie
+		zdefiniuj wskaźnik current do nowego elementu
+		zaalokuj pamięć dla nowego elementu
+		przypisz wartość "number" do pola "data" nowego elementu.
+		ustaw pole "poprzedni" na NULL.
+		ustaw pole "następny" nowego elementu na obecny "head"
+		ustaw pole "poprzedni" obecnego "head" na "current"
+		przypisz adres nowego elementu do wskaźnika "head"
+
+
+Funkcja add_front przyjmuje jako parametry wskaźnik do wskaźnika head i liczbę number, 
+która zostanie przypisana do pola data nowego elementu. 
+Jeśli lista jest pusta, to funkcja tworzy nowy element i ustawia head na wskaźnik do niego. 
+Jeśli lista nie jest pusta, to funkcja tworzy nowy element i ustawia jego next na obecny head, 
+a previous obecnego head na nowy element. 
+Następnie ustawia head na wskaźnik do nowego elementu.
+
+
+
+
+Dodawanie elementy na końcu listy
+
+Wejście (ListaElementow_typ **glowa, liczba)
+	jeżeli lista jest pusta wykonaj
+		alokuj pamięć dla nowego elementu
+		przypisz wartość "liczba" do pola "data" nowego elementu
+		ustaw pole "poprzedni" na NULL
+		ustaw pole "następny" na NULL
+		przypisz adres nowego elementu do wskaźnika "glowa"
+	w przeciwnym razie
+		zdefiniuj wskaźnik "current" jako "glowa"
+		przejdź przez listę, aż nie dotrzesz do ostatniego elementu
+		zaalokuj pamięć dla nowego elementu
+		przypisz wartość "liczba" do pola "data" nowego elementu
+		ustaw pole "następny" obecnego ostatniego elementu na nowy element
+		ustaw pole "poprzedni" nowego elementu na obecny ostatni element
+		ustaw pole "następny" nowego elementu na NULL
+		
+
+Funkcja add_back przyjmuje jako parametry wskaźnik do wskaźnika head i liczbę number, 
+która zostanie przypisana do pola data nowego elementu. 
+Jeśli lista jest pusta, to funkcja tworzy nowy element i ustawia head na wskaźnik do niego. 
+Jeśli lista nie jest pusta, to funkcja tworzy nowy element 
+i ustawia jego previous na ostatni element listy. 
+Następnie ustawia next ostatniego elementu na nowy element.
+
+
+
+
+Dodawanie elementu o wybranym indeksie
+
+Wejście (ListaElementow_typ **glowa, liczba, indeks)
+	Jeżeli indeks==0 wykonaj
+		użyj funkcji add_front z paramentrami "glowa" i "liczba"
+	w przeciwnym razie
+		jeżeli indeks jest równy rozmiarowi listy wykonaj
+			użyj add_back z parametrami "glowa" "number"	
+		zdefiniuj wskaźnik "current" jako "glowa"
+		zdefiniuj zmienną "i" jako 0
+		przejdź przez listę, aż nie dotrzesz do elementu poprzedzającego indeks		
+		zdefiniuj wskaźnik "tmp" jako następny element po "current"
+		zaalokuj pamięć dla nowego elementu
+		przypisz wartość "liczba" do pola "data" nowego elementu
+		ustaw pole "poprzedni" nowego elementu na "current"
+		ustaw pole "poprzedni" tmp na nowy element
+		ustaw pole "następny" nowego elementu na "tmp"
+
+
+Funkcja add_by_index przyjmuje jako parametry wskaźnik do wskaźnika head, liczbę number, 
+która zostanie przypisana do pola data nowego elementu oraz pozycję na której nowy element ma zostać wstawiony. 
+Jeśli pozycja jest równa 0, to funkcja używa funkcji add_front(). 
+Jeśli pozycja jest równa rozmiarowi listy, to funkcja używa funkcji add_back(). 
+Jeśli pozycja jest inną liczbą, to funkcja przechodzi przez listę, 
+aż nie dotrze do elementu poprzedzającego pozycję, 
+następnie tworzy nowy element i wstawia go na wybraną pozycję.
+
+
+
+Usuwanie pierwszego elementu listy
+	
+Wejście (ListaElementow_typ **glowa)
+	Jeżeli lista nie jest pusta wykonaj
+		Jeżeli pierwszy element jest jedynym na liście
+			ustaw wskaźnik "glowa" na NULL
+		w przeciwnym razie
+			Zdefiniuj wskaźnik "tmp" jako następny element po "glowa"
+			zwolnij zaalokowaną pamięć dla pierwszego elementu
+			ustaw	"glowa" na "tmp"
+			ustaw pole "poprzedni" nowej głowy na NULL
+
+
+Funkcja delete_front usuwa pierwszy element z listy, 
+przypisując następny element po pierwszym jako nowy head. 
+Jeśli lista jest pusta, to funkcja nic nie robi. 
+Jeśli pierwszy element jest jedynym elementem na liście, 
+to funkcja ustawia head na NULL. 
+Jeśli nie jest to jedyny element, to funkcja zwolnienia pamięci zaalokowanej dla pierwszego elementu, 
+ustawia head na następny element i ustawia previous dla tego elementu na NULL
+
+
+
+Usuwanie ostaniego elementu z listy
+
+Wejście (ListaElementow_typ **glowa)
+	Jeżeli next po head jest równy NULL wykonaj
+		Ustaw head na NULL
+	w przeciwnym razie
+		Zdefiniuj wskaźnik "current" jako head
+		Przejdź przez listę, aż nie dotrzesz do przedostatniego elementu.
+		Zwolnij pamięć zaalokowaną dla ostatniego elementu
+		Ustaw pole next przedostatniego elementu na NULL
+
+
+Funkcja delete_back usuwa ostatni element z listy. 
+Jeśli jest to jedyny element na liście, to funkcja ustawia head na NULL. 
+Jeśli nie jest to jedyny element, to funkcja przechodzi przez listę, 
+aż nie dotrze do przedostatniego elementu, 
+zwalnia pamięć zaalokowaną dla ostatniego elementu i ustawia pole next przedostatniego elementu na NULL.
+
+
+
+Usuwanie elementu o wybranym indeksie
+
+Wejście (ListaElementow_typ **glowa, indeks)
+	Jeżeli indeks==0 wykonaj
+		Użyj funkcji delete_front() z parametrem "head"
+	w przeciwnym razie
+		Zdefiniuj wskaźnik "current" jako head
+		Zdefiniuj zmienną "i" jako 0
+		Przejdź przez listę, aż nie dotrzesz do elementu poprzedzającego pozycję
+		Zdefiniuj wskaźnik "tmp" jako następny element po "current"
+		Ustaw pole "next" elementu poprzedzającego pozycję, na pole "next" tymczasowego elementu (tmp)
+		Ustaw pole "previous" elementu po tymczasowym elementu na current
+		Zwolnij pamięć zaalokowaną dla tymczasowego elementu (tmp)
+
+
+Funkcja delete_by_index usuwa element z listy na określonej pozycji. 
+Jeśli pozycja jest równa 0, to funkcja używa funkcji delete_front(). 
+W przeciwnym razie, funkcja przechodzi przez listę, aż nie dotrze do elementu poprzedzającego pozycję, 
+zdefiniowanie tymczasowego elementu jako następny element po "current", 
+ustawienie pola next elementu poprzedzającego pozycję na pole next tymczasowego elementu, 
+ustawienie pola previous elementu po tymczasowym elementu na current, 
+zwalnianie pamięci zaalokowanej dla tymczasowego elementu.
+
+
+
+Pokazanie listy
+
+Wejście (ListaElementow_typ *glowa)
+	Wypisz pustą linię
+	Jeżeli lsita jest pusta wykonaj
+		Wypisz "Lista jest pusta"		
+	W przeciwynym razie
+		Zdefiniuj wskaźnik "current" jako head
+		Dopóki current != NULL wykonuj
+			Wypisz pole data elementu "current"
+			Wypisz pustą linię
+			Przypisz pole "next" elementu "current" do "current"
+		
+
+Funkcja show wyświetla zawartość listy. Jeśli lista jest pusta, 
+to funkcja wyświetla komunikat "Lista jest pusta". W przeciwnym razie, funkcja używa pętli do-while, 
+aby przejść przez listę i wyświetlić pole data każdego elementu.
+
+
+
+Pokazanie listy od końca
+
+Wejście (ListaElementow_typ *glowa)
+	Wypisz pustą linię
+	Jeżeli lista jest pusta wykonaj
+		Wypisz	"Lista jest pusta"
+	w przeciwnym razie
+		Zdefiniuj wskaźnik "current" jako head
+		Przejdź przez listę, aż nie dotrzesz do ostatniego elementu
+		Dopóki current != NULL wykonuj
+			Wypisz pole data elementu "current"
+			Wypisz pustą linię
+			Przypisz pole "previous" elementu "current" do "current"
+
+
+Funkcja show_reverse wyświetla zawartość listy od końca. 
+Jeśli lista jest pusta, to funkcja wyświetla komunikat "Lista jest pusta". 
+W przeciwnym razie, funkcja przechodzi przez listę, aż nie dotrze do ostatniego elementu, 
+a następnie używa pętli do-while, 
+aby przejść przez listę od końca i wyświetlić pole data każdego elementu.
+
+
+
+Sprawdzanie ile elementów jest na liście
+
+Wejście (ListaElementow_typ *glowa)
+	Zdefiniuj licznik jako 0
+	Jeżeli lista jest pusta wykonaj
+		Zwróć licznik
+	w przeciwnym razie
+		Zdefiniuj wskaźnik "current" jako head
+		Dopóki current != NULL wykonuj
+			Zwiększ licznik o 1
+			Przypisz pole "next" elementu "current" do "current"
+	Zwróć licznik
+
+
+Funkcja list_size zwraca liczbę elementów w liście. 
+Jeśli lista jest pusta, zwraca 0. W przeciwnym razie, 
+funkcja przechodzi przez listę i zwiększa licznik o 1 za każdym przejściem przez pętlę. 
+Gdy przejdzie przez całą listę, zwraca liczbę elementów.
