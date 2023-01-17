@@ -44,7 +44,7 @@ int main()
     printf("-------------------\n");
     printf("\nPoglad listy: ");
     show(head);
-    
+    printf("\n\n");
 
     printf("1. Dodaj element na poczatek listy.\n");
     printf("2. Dodaj element na koniec listy.\n");
@@ -233,7 +233,7 @@ void delete_by_index(ListElement_type **head, int position) {
 // Pokazywanie listy od poczatku
 void show(ListElement_type *head) {
     printf("\n");
-    if(head==NULL) printf("Lista jest pusta");
+    if(head==NULL) printf("Lista jest pusta\n");
     else {
         ListElement_type *current=head;
         do {    //wypisywanie elementow po kolei
@@ -247,7 +247,7 @@ void show(ListElement_type *head) {
 // Pokazanie listy od konca
 void show_reverse(ListElement_type *head) {
     printf("\n");
-    if(head==NULL) printf("Lista jest pusta");
+    if(head==NULL) printf("Lista jest pusta\n");
     else {
         ListElement_type *current=head;
         while (current->next != NULL) {
