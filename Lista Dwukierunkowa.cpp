@@ -49,7 +49,7 @@ int main()
 	
     printf("1. Dodaj element na poczatek listy.\n");
     printf("2. Dodaj element na koniec listy.\n");
-    printf("3. Dodaj element zgodnie z wybranym indeksem.\n");
+    printf("3. Dodaj element o wybranym indeksie.\n");
     printf("4. Usun element z poczatku listy.\n");
     printf("5. Usun element z konca listy.\n");
     printf("6. Usun element o wybranym indeksie.\n");
